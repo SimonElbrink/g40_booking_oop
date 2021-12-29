@@ -37,10 +37,9 @@ public class Booking {
                  double price,
                  String administrator,
                  String vaccineId,
-                 Patient patient,
                  Premises premises) {
 
-    this(UUID.randomUUID().toString(), dateTime, price, administrator, vaccineId,true, patient, premises);
+    this(UUID.randomUUID().toString(), dateTime, price, administrator, vaccineId,true, null, premises);
   }
 
   Booking() {
@@ -98,6 +97,7 @@ public class Booking {
 
   public void setPatient(Patient patient) {
     this.patient = patient;
+    setVacant(this.patient == null);
   }
 
   public Premises getPremises() {
@@ -109,7 +109,7 @@ public class Booking {
   }
 
   public String bookingData(){
-    return "Booking: " + "id: " + id + "dateTime: " + dateTime + "vaccineId: " + vaccineId+ "vacant: " + vacant;
+    return "Booking: " + " id: " + id + " dateTime: " + dateTime + " vaccineId: " + vaccineId+ " vacant: " + vacant;
   }
 
 }
