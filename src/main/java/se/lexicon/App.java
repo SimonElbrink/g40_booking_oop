@@ -1,10 +1,14 @@
 package se.lexicon;
 
 
+import se.lexicon.data.AddressDAO;
+import se.lexicon.data.AddressDAOIMPL;
 import se.lexicon.model.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class App
 {
@@ -55,5 +59,54 @@ public class App
         System.out.println(testBooking1.bookingData());
         System.out.println(testBooking2.bookingData());
         System.out.println(testBooking3.bookingData());
+
+
+
+
+        AddressDAO addressStorage1 = AddressDAOIMPL.getInstance();
+
+        addressStorage1.create(testAddress);
+        addressStorage1.create("Storgatan 20", "123 45", "Växjö");
+        addressStorage1.create("VårdGatan 10", "123 45", "Växjö");
+        addressStorage1.create("Sjukhusvägen 5", "123 45", "Växjö");
+        addressStorage1.create("Sjukhusvägen 1", "543 21", "SjukaStaden");
+
+        System.out.println("_____________ Storage1 - FindAll __________________");
+
+        List<Address> allAddresses = addressStorage1.findAll();
+
+//        for (Address address : allAddresses) {
+//            System.out.println(address);
+//        }
+        allAddresses.forEach((Address address) -> System.out.println(address));
+
+        System.out.println("_____________ FindAddressByCity __________________");
+
+        List<Address> addressesInSjukaStaden = addressStorage1.findAddressByCity("SjukaStaden");
+
+        addressesInSjukaStaden.forEach(System.out::println);
+
+
+        System.out.println("_____________Storage2 - FindAll __________________");
+        AddressDAO addressStorage2 = AddressDAOIMPL.getInstance(); // Same Reference as storage 1
+        addressStorage2.create(testAddress);
+        addressStorage2.create("Nygatan 8", "360 73", "Lenhovda");
+
+        addressStorage2.findAll().forEach(System.out::println);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

@@ -31,7 +31,9 @@ public class UserCredentialsTest {
 
     @Test
     public void setUsername_should_throw_IllegalArgumentException_when_null() {
-       assertThrows(IllegalArgumentException.class, () -> testObject.setUsername(null));
+       assertThrows(
+               IllegalArgumentException.class,
+               () -> testObject.setUsername(null));
     }
 
     @Test
