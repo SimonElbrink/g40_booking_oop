@@ -10,21 +10,19 @@ import java.util.List;
 public class AddressDAOIMPL implements AddressDAO{
 
     //SINGLETON, to accomplice Single Source of truth. - One storage of Addresses for this whole program.
-    private static final AddressDAOIMPL INSTANCE;
-
-    static {
-        INSTANCE = new AddressDAOIMPL();
-    }
+    private static AddressDAOIMPL INSTANCE;
 
     public static AddressDAOIMPL getInstance(){
+        if (INSTANCE == null) INSTANCE = new AddressDAOIMPL(null);
         return INSTANCE;
     }
 
-    protected static AddressDAOIMPL getTestInstance(List<Address> addressList){
+    static AddressDAOIMPL getTestInstance(List<Address> addressList){
         return new AddressDAOIMPL(addressList);
     }
 
 
+    //Where our Addresses are stored.
     private List<Address> addressList;
 
     private AddressDAOIMPL() {
@@ -32,6 +30,7 @@ public class AddressDAOIMPL implements AddressDAO{
     }
 
     private AddressDAOIMPL(List<Address> addressList) {
+        if (addressList == null) addressList = new ArrayList<>();
         this.addressList = addressList;
     }
 
