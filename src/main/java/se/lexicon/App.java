@@ -3,6 +3,8 @@ package se.lexicon;
 
 import se.lexicon.data.AddressDAO;
 import se.lexicon.data.AddressDAOIMPL;
+import se.lexicon.data.UserCredentialsDAO;
+import se.lexicon.data.UserCredentialsDAOIMPL;
 import se.lexicon.model.*;
 
 import java.time.LocalDate;
@@ -87,12 +89,19 @@ public class App
         addressesInSjukaStaden.forEach(System.out::println);
 
 
+        //"Separate File"
         System.out.println("_____________Storage2 - FindAll __________________");
         AddressDAO addressStorage2 = AddressDAOIMPL.getInstance(); // Same Reference as storage 1
         addressStorage2.create(testAddress);
         addressStorage2.create("Nygatan 8", "360 73", "Lenhovda");
 
         addressStorage2.findAll().forEach(System.out::println);
+
+
+        UserCredentialsDAO  ucDAO = UserCredentialsDAOIMPL.getINSTANCE();
+
+        ucDAO = UserCredentialsDAOIMPL.getINSTANCE();
+//        ucDAO.create(null);
 
 
 
