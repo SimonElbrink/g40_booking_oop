@@ -17,7 +17,7 @@ public class UserCredentials {
   private String role;
 
   public UserCredentials(String id, String username, String password, String role) {
-    if (id == null) throw new RuntimeException("id was null");
+    if (id == null) throw new IllegalArgumentException("id was null");
     this.id = id;
     setUsername(username);
     setPassword(password);
