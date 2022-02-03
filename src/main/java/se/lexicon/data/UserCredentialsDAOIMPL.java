@@ -6,14 +6,12 @@ import se.lexicon.io.URLConstants;
 import se.lexicon.model.UserCredentials;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class UserCredentialsDAOIMPL implements UserCredentialsDAO {
 
 
-    private static UserCredentialsDAO INSTANCE;
+    private static UserCredentialsDAOIMPL INSTANCE;
 
 //    //Eager Instance
 //    static {
@@ -21,23 +19,22 @@ public class UserCredentialsDAOIMPL implements UserCredentialsDAO {
 //    }
 
     //Lazy Instance
-    public static UserCredentialsDAO getINSTANCE(){
+    public static UserCredentialsDAOIMPL getINSTANCE(){
         if (INSTANCE == null) INSTANCE = new UserCredentialsDAOIMPL(null);
         return INSTANCE;
     }
 
-    static UserCredentialsDAO getTestINSTANCE(List<UserCredentials> credentialsList){
-        INSTANCE = new UserCredentialsDAOIMPL(credentialsList);
-
-        return INSTANCE;
+    static UserCredentialsDAOIMPL getTestINSTANCE(Collection<UserCredentials> credentialsList){
+        if (credentialsList == null) credentialsList = new HashSet<>();
+        return new UserCredentialsDAOIMPL(credentialsList);
     }
 
-    UserCredentialsDAOIMPL(List<UserCredentials> userCredentialsList) {
-        if (userCredentialsList == null) userCredentialsList = new ArrayList<>(JsonManager.getInstance().deserializeFromJson(new File(URLConstants.CREDENTIALS_JSON), UserCredentials.class));
-        this.userCredentialsList = userCredentialsList;
+    private UserCredentialsDAOIMPL(Collection<UserCredentials> userCredentialsList) {
+        if (userCredentialsList == null) userCredentialsList = new HashSet<>(JsonManager.getInstance().deserializeFromJson(new File(URLConstants.CREDENTIALS_JSON), UserCredentials.class));
+        this.userCredentialsList = new HashSet<>(userCredentialsList);
     }
 
-    private final List<UserCredentials> userCredentialsList;
+    private final Set<UserCredentials> userCredentialsList;
 
     @Override
     public UserCredentials create(UserCredentials userCredentials) {
@@ -58,18 +55,20 @@ public class UserCredentialsDAOIMPL implements UserCredentialsDAO {
 
         for (UserCredentials uc : userCredentialsList) {
             if (uc.getId().equals(id)){
-                return Optional.ofNullable(uc);
+                return Optional.of(uc);
             }
         }
         return Optional.empty();
     }
 
     @Override
-    public UserCredentials findByUserName(String userName) {
+    public Optional<UserCredentials> findByUserName(String userName) {
         for (UserCredentials uc: userCredentialsList){
-            if (uc.getUsername().equals(userName)) return uc;
+            if (uc.getUsername().equals(userName)){
+                Optional.of(uc);
+            }
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override

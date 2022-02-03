@@ -3,12 +3,12 @@ package se.lexicon.data;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import se.lexicon.data.interfaces.UserCredentialsDAO;
 import se.lexicon.model.UserCredentials;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,7 +17,7 @@ class UserCredentialsDAOIMPLTest {
     public static final String USERNAME = "Joe";
     public static final String PASSWORD = "James90";
     public static final String ROLE = "ADMIN";
-    UserCredentialsDAO testObject;
+    UserCredentialsDAOIMPL testObject;
     UserCredentials userCredentials;
 
     public List<UserCredentials> ucData = new ArrayList<>(
@@ -45,7 +45,7 @@ class UserCredentialsDAOIMPLTest {
         UserCredentials saved = testObject.create(temp);
 
         assertNotNull(saved);
-        assertTrue(ucData.contains(temp));
+        assertTrue(testObject.findById(temp.getId()).isPresent());
 
     }
 
@@ -64,21 +64,21 @@ class UserCredentialsDAOIMPLTest {
     void findAll() {
         List<UserCredentials> all = testObject.findAll();
         assertNotNull(all);
-        assertEquals(ucData,all);
+        assertEquals(3, all.size());
     }
 
     @Test
     @DisplayName("findByUserName Should return Object With Given Valid Parameter")
     void findByUserName_Successfully() {
-        UserCredentials found = testObject.findByUserName(USERNAME);
+        Optional<UserCredentials> found = testObject.findByUserName(USERNAME);
         assertNotNull(found);
     }
 
     @Test
-    @DisplayName("findByName Should return null when not found")
+    @DisplayName("findByName Should return Empty Optional when not found")
     void findByName_param_null() {
-        UserCredentials found = testObject.findByUserName(null);
-        assertNull(found);
+        Optional<UserCredentials> found = testObject.findByUserName(null);
+        assertFalse(found.isPresent());
     }
 
 
@@ -97,7 +97,7 @@ class UserCredentialsDAOIMPLTest {
         boolean wasRemoved = testObject.delete(userCredentials.getId());
 
         assertTrue(wasRemoved);
-        assertFalse(ucData.contains(userCredentials));
+        assertFalse(testObject.findById(userCredentials.getId()).isPresent());
 
     }
 }

@@ -1,15 +1,9 @@
 package se.lexicon.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class UserCredentials {
-
-  /*
-  - id:String
-  - username:String
-  - password:String
-  - role:String
-  */
+public class UserCredentials implements Serializable {
 
   private String id;
   private String username;
@@ -60,5 +54,15 @@ public class UserCredentials {
   public void setRole(String role) {
     if (role == null) throw new IllegalArgumentException("Role was null");
     this.role = role;
+  }
+
+  @Override
+  public String toString() {
+    return "UserCredentials{" +
+            "id='" + id + '\'' +
+            ", username='" + username + '\'' +
+            ", password='" + password + '\'' +
+            ", role='" + role + '\'' +
+            '}';
   }
 }
