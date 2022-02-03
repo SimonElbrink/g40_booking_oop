@@ -82,6 +82,6 @@ public class UserCredentialsDAOIMPL implements UserCredentialsDAO {
 
     @Override
     public boolean delete(String id) {
-        return userCredentialsList.remove(findById(id));
+        return userCredentialsList.removeIf(userCredentials -> userCredentials.getId().equals(id));
     }
 }

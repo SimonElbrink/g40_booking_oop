@@ -5,10 +5,7 @@ import se.lexicon.io.JsonManager;
 import se.lexicon.model.Address;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static se.lexicon.io.URLConstants.ADDRESS_JSON;
 

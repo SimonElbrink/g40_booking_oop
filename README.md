@@ -11,3 +11,10 @@ Update DAO
 DAO
 TEST
 
+TODO DAO
+ - [x] Address
+ - [] Booking
+ - [] ContactInfo
+ - [x] Patient
+ - [x] Premises
+ - [x] UserCredentials
