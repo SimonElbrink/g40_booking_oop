@@ -2,6 +2,8 @@ package se.lexicon;
 
 
 import se.lexicon.data.*;
+import se.lexicon.data.AddressDAO;
+import se.lexicon.data.UserCredentialsDAO;
 import se.lexicon.io.JsonManager;
 import se.lexicon.model.*;
 
@@ -10,8 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static se.lexicon.io.URLConstants.ADDRESS_JSON;
-import static se.lexicon.io.URLConstants.CREDENTIALS_JSON;
+import static se.lexicon.io.URLConstants.*;
 
 public class App
 {
@@ -113,7 +114,7 @@ public class App
         //serialize Address
         JsonManager.getInstance().serializeToJson(AddressDAOIMPL.getInstance().findAll(),new File(ADDRESS_JSON));
         //serialize Patients
-//        JsonManager.getInstance().serializeToJson(PatientDAOIMPL);
+        JsonManager.getInstance().serializeToJson(PatientDAOIMPL.getInstance().findAll(), new File(PATIENTS_JSON));
         //serialize Credentials
         JsonManager.getInstance().serializeToJson(UserCredentialsDAOIMPL.getINSTANCE().findAll(), new File(CREDENTIALS_JSON));
 

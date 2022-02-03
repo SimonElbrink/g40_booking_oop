@@ -1,18 +1,36 @@
 package se.lexicon.data;
 
+import se.lexicon.data.PatientDAO;
+import se.lexicon.io.JsonManager;
 import se.lexicon.model.Patient;
 
+import java.io.File;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static se.lexicon.io.URLConstants.PATIENTS_JSON;
+
 public class PatientDAOIMPL implements PatientDAO, Serializable {
 
-//    private Patient[] patientArray;
+
+    private static PatientDAOIMPL INSTANCE;
+
+    public static PatientDAOIMPL getInstance(){
+        if (INSTANCE == null) INSTANCE = new PatientDAOIMPL(null);
+        return INSTANCE;
+    }
+
+    public PatientDAOIMPL(HashSet<Patient> patientCollection) {
+        if (patientCollection == null){
+            this.patientCollection = new HashSet<>(JsonManager.getInstance().deserializeFromJson(new File(PATIENTS_JSON), Patient.class));
+        }else{
+            this.patientCollection = patientCollection;
+        }
+    }
+
     private HashSet<Patient> patientCollection;
-
-
 
     @Override
     public Patient create(Patient patient) {

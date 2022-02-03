@@ -1,5 +1,6 @@
 package se.lexicon.data;
 
+import se.lexicon.data.AddressDAO;
 import se.lexicon.exceptions.ObjectNotFoundException;
 import se.lexicon.io.JsonManager;
 import se.lexicon.model.Address;
@@ -11,7 +12,7 @@ import java.util.List;
 
 import static se.lexicon.io.URLConstants.ADDRESS_JSON;
 
-public class AddressDAOIMPL implements AddressDAO{
+public class AddressDAOIMPL implements AddressDAO {
 
     //SINGLETON, to accomplice Single Source of truth. - One storage of Addresses for this whole program.
     private static AddressDAOIMPL INSTANCE;
@@ -25,11 +26,6 @@ public class AddressDAOIMPL implements AddressDAO{
         return new AddressDAOIMPL(addressList);
     }
 
-
-    //Where our Addresses are stored.
-    private List<Address> addressList;
-
-
     private AddressDAOIMPL(List<Address> addressList) {
         if (addressList == null) {
             this.addressList = new ArrayList<>(JsonManager.getInstance().deserializeFromJson(new File(ADDRESS_JSON),Address.class));
@@ -37,6 +33,10 @@ public class AddressDAOIMPL implements AddressDAO{
             this.addressList = addressList;
         }
     }
+
+    //Where our Addresses are stored.
+    private List<Address> addressList;
+
 
     @Override
     public Address create(String streetAddress, String zipCode, String city) {
