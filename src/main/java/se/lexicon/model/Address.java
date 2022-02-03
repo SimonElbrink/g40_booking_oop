@@ -1,9 +1,9 @@
 package se.lexicon.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Address {
-  // Fields
+public class Address implements Serializable {
   private String id;
   private String streetAddress;
   private String zipCode;

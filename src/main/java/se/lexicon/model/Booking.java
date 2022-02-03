@@ -1,9 +1,10 @@
 package se.lexicon.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class Booking {
+public class Booking implements Serializable {
 
   private String id;
   private LocalDateTime dateTime;
