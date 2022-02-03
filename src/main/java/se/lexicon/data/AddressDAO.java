@@ -6,6 +6,7 @@ import se.lexicon.model.Address;
 import java.util.List;
 
 //CRUD - Create, Read, Update, Delete
+//Contract
 public interface AddressDAO extends GenericCRUD<Address, String>{
 
     //CREATE

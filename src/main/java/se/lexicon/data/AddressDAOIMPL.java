@@ -101,6 +101,6 @@ public class AddressDAOIMPL implements AddressDAO{
 
     @Override
     public boolean delete(String id) {
-        return addressList.remove(findById(id));
+        return addressList.removeIf(address -> address.getId().equals(id));
     }
 }
