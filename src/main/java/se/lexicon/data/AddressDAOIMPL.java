@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static se.lexicon.io.URLConstants.ADDRESS_URL;
+import static se.lexicon.io.URLConstants.ADDRESS_JSON;
 
 public class AddressDAOIMPL implements AddressDAO{
 
@@ -32,7 +32,7 @@ public class AddressDAOIMPL implements AddressDAO{
 
     private AddressDAOIMPL(List<Address> addressList) {
         if (addressList == null) {
-            this.addressList = new ArrayList<>(JsonManager.getInstance().deserializeFromJson(new File(ADDRESS_URL),Address.class));
+            this.addressList = new ArrayList<>(JsonManager.getInstance().deserializeFromJson(new File(ADDRESS_JSON),Address.class));
         }else{
             this.addressList = addressList;
         }

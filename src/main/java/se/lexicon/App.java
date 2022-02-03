@@ -8,11 +8,10 @@ import se.lexicon.model.*;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
-import static se.lexicon.io.URLConstants.ADDRESS_URL;
-import static se.lexicon.io.URLConstants.CREDENTIALS_URL;
+import static se.lexicon.io.URLConstants.ADDRESS_JSON;
+import static se.lexicon.io.URLConstants.CREDENTIALS_JSON;
 
 public class App
 {
@@ -112,11 +111,11 @@ public class App
          // Save all data to file. (using json.)
 
         //serialize Address
-        JsonManager.getInstance().serializeToJson(AddressDAOIMPL.getInstance().findAll(),new File(ADDRESS_URL));
+        JsonManager.getInstance().serializeToJson(AddressDAOIMPL.getInstance().findAll(),new File(ADDRESS_JSON));
         //serialize Patients
 //        JsonManager.getInstance().serializeToJson(PatientDAOIMPL);
         //serialize Credentials
-        JsonManager.getInstance().serializeToJson(UserCredentialsDAOIMPL.getINSTANCE().findAll(), new File(CREDENTIALS_URL));
+        JsonManager.getInstance().serializeToJson(UserCredentialsDAOIMPL.getINSTANCE().findAll(), new File(CREDENTIALS_JSON));
 
     }
 }
