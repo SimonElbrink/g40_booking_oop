@@ -1,11 +1,15 @@
 package se.lexicon.data;
 
 import se.lexicon.exceptions.ObjectNotFoundException;
+import se.lexicon.io.JsonManager;
 import se.lexicon.model.Address;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static se.lexicon.io.URLConstants.ADDRESS_URL;
 
 public class AddressDAOIMPL implements AddressDAO{
 
@@ -25,13 +29,13 @@ public class AddressDAOIMPL implements AddressDAO{
     //Where our Addresses are stored.
     private List<Address> addressList;
 
-    private AddressDAOIMPL() {
-        this.addressList = new ArrayList<>();
-    }
 
     private AddressDAOIMPL(List<Address> addressList) {
-        if (addressList == null) addressList = new ArrayList<>();
-        this.addressList = addressList;
+        if (addressList == null) {
+            this.addressList = new ArrayList<>(JsonManager.getInstance().deserializeFromJson(new File(ADDRESS_URL),Address.class));
+        }else{
+            this.addressList = addressList;
+        }
     }
 
     @Override

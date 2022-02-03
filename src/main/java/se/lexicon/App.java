@@ -1,16 +1,18 @@
 package se.lexicon;
 
 
-import se.lexicon.data.AddressDAO;
-import se.lexicon.data.AddressDAOIMPL;
-import se.lexicon.data.UserCredentialsDAO;
-import se.lexicon.data.UserCredentialsDAOIMPL;
+import se.lexicon.data.*;
+import se.lexicon.io.JsonManager;
 import se.lexicon.model.*;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static se.lexicon.io.URLConstants.ADDRESS_URL;
+import static se.lexicon.io.URLConstants.CREDENTIALS_URL;
 
 public class App
 {
@@ -67,11 +69,11 @@ public class App
 
         AddressDAO addressStorage1 = AddressDAOIMPL.getInstance();
 
-        addressStorage1.create(testAddress);
-        addressStorage1.create("Storgatan 20", "123 45", "Växjö");
-        addressStorage1.create("VårdGatan 10", "123 45", "Växjö");
-        addressStorage1.create("Sjukhusvägen 5", "123 45", "Växjö");
-        addressStorage1.create("Sjukhusvägen 1", "543 21", "SjukaStaden");
+//        addressStorage1.create(testAddress);
+//        addressStorage1.create("Storgatan 20", "123 45", "Växjö");
+//        addressStorage1.create("VårdGatan 10", "123 45", "Växjö");
+//        addressStorage1.create("Sjukhusvägen 5", "123 45", "Växjö");
+//        addressStorage1.create("Sjukhusvägen 1", "543 21", "SjukaStaden");
 
         System.out.println("_____________ Storage1 - FindAll __________________");
 
@@ -82,20 +84,20 @@ public class App
 //        }
         allAddresses.forEach((Address address) -> System.out.println(address));
 
-        System.out.println("_____________ FindAddressByCity __________________");
-
-        List<Address> addressesInSjukaStaden = addressStorage1.findAddressByCity("SjukaStaden");
-
-        addressesInSjukaStaden.forEach(System.out::println);
+//        System.out.println("_____________ FindAddressByCity __________________");
+//
+//        List<Address> addressesInSjukaStaden = addressStorage1.findAddressByCity("SjukaStaden");
+//
+//        addressesInSjukaStaden.forEach(System.out::println);
 
 
         //"Separate File"
-        System.out.println("_____________Storage2 - FindAll __________________");
-        AddressDAO addressStorage2 = AddressDAOIMPL.getInstance(); // Same Reference as storage 1
-        addressStorage2.create(testAddress);
-        addressStorage2.create("Nygatan 8", "360 73", "Lenhovda");
+//        System.out.println("_____________Storage2 - FindAll __________________");
+//        AddressDAO addressStorage2 = AddressDAOIMPL.getInstance(); // Same Reference as storage 1
+//        addressStorage2.create(testAddress);
+//        addressStorage2.create("Nygatan 8", "360 73", "Lenhovda");
 
-        addressStorage2.findAll().forEach(System.out::println);
+//        addressStorage2.findAll().forEach(System.out::println);
 
 
         UserCredentialsDAO  ucDAO = UserCredentialsDAOIMPL.getINSTANCE();
@@ -103,19 +105,18 @@ public class App
         ucDAO = UserCredentialsDAOIMPL.getINSTANCE();
 //        ucDAO.create(null);
 
+        shutdown(); // At the end.
+    }
 
+    public static void shutdown(){
+         // Save all data to file. (using json.)
 
-
-
-
-
-
-
-
-
-
-
-
+        //serialize Address
+        JsonManager.getInstance().serializeToJson(AddressDAOIMPL.getInstance().findAll(),new File(ADDRESS_URL));
+        //serialize Patients
+//        JsonManager.getInstance().serializeToJson(PatientDAOIMPL);
+        //serialize Credentials
+        JsonManager.getInstance().serializeToJson(UserCredentialsDAOIMPL.getINSTANCE().findAll(), new File(CREDENTIALS_URL));
 
     }
 }
