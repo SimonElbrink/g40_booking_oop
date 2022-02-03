@@ -13,8 +13,8 @@ TEST
 
 TODO DAO
  - [x] Address
- - [] Booking
- - [] ContactInfo
+ - [x] Booking
+ - [x] ContactInfo
  - [x] Patient
  - [x] Premises
  - [x] UserCredentials
