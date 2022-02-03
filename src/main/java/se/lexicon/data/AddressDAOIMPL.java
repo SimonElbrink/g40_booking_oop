@@ -19,20 +19,25 @@ public class AddressDAOIMPL implements AddressDAO {
         return INSTANCE;
     }
 
+    static AddressDAOIMPL getTestInstance(Collection<Address> addresses){
+        if (addresses == null) addresses = new ArrayList<>();
+        return new AddressDAOIMPL(addresses);
+    }
+
     static AddressDAOIMPL getTestInstance(List<Address> addressList){
         return new AddressDAOIMPL(addressList);
     }
 
-    private AddressDAOIMPL(List<Address> addressList) {
+    private AddressDAOIMPL(Collection<Address> addressList) {
         if (addressList == null) {
-            this.addressList = new ArrayList<>(JsonManager.getInstance().deserializeFromJson(new File(ADDRESS_JSON),Address.class));
+            this.addressList = new HashSet<>(JsonManager.getInstance().deserializeFromJson(new File(ADDRESS_JSON),Address.class));
         }else{
-            this.addressList = addressList;
+            this.addressList = new HashSet<>(addressList);
         }
     }
 
     //Where our Addresses are stored.
-    private final List<Address> addressList;
+    private final Set<Address> addressList;
 
 
     @Override
@@ -63,7 +68,7 @@ public class AddressDAOIMPL implements AddressDAO {
 
     @Override
     public List<Address> findAll() {
-        return Collections.unmodifiableList(addressList);
+        return new ArrayList<>(addressList);
     }
 
     @Override

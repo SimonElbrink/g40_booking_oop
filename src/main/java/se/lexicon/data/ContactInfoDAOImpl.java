@@ -17,12 +17,16 @@ public class ContactInfoDAOImpl implements ContactInfoDAO {
         return INSTANCE;
     }
 
+    static ContactInfoDAOImpl getTestInstance(Collection<ContactInfo> collection){
+        if (collection == null) collection = new ArrayList<>();
+        return new ContactInfoDAOImpl(collection);
+    }
 
-    public ContactInfoDAOImpl(Set<ContactInfo> contactInfoSet) {
+    private ContactInfoDAOImpl(Collection<ContactInfo> contactInfoSet) {
         if(contactInfoSet == null){
             this.contactInfoSet = new HashSet<>(JsonManager.getInstance().deserializeFromJson(new File(URLConstants.CONTACT_INFO_JSON), ContactInfo.class));
         }else{
-            this.contactInfoSet = contactInfoSet;
+            this.contactInfoSet = new HashSet<>(contactInfoSet);
         }
     }
     private final Set<ContactInfo> contactInfoSet;

@@ -21,16 +21,20 @@ public class PatientDAOIMPL implements PatientDAO, Serializable {
         if (INSTANCE == null) INSTANCE = new PatientDAOIMPL(null);
         return INSTANCE;
     }
+    static PatientDAOIMPL getTestInstance(Collection<Patient> collection){
+        if (collection == null) collection = new ArrayList<>();
+        return new PatientDAOIMPL(collection);
+    }
 
-    public PatientDAOIMPL(HashSet<Patient> patientCollection) {
+    private PatientDAOIMPL(Collection<Patient> patientCollection) {
         if (patientCollection == null){
             this.patientCollection = new HashSet<>(JsonManager.getInstance().deserializeFromJson(new File(PATIENTS_JSON), Patient.class));
         }else{
-            this.patientCollection = patientCollection;
+            this.patientCollection = new HashSet<>(patientCollection);
         }
     }
 
-    private final HashSet<Patient> patientCollection;
+    private final Set<Patient> patientCollection;
 
     @Override
     public Patient create(Patient patient) {

@@ -22,15 +22,20 @@ public class PremisesDAOIMPL implements PremisesDAO {
         return INSTANCE;
     }
 
-    public PremisesDAOIMPL(Set<Premises> premisesStorage) {
+    static PremisesDAOIMPL getTestInstance(Collection<Premises> premises){
+        if (premises == null) premises = new ArrayList<>();
+        return new PremisesDAOIMPL(premises);
+    }
+
+    private PremisesDAOIMPL(Collection<Premises> premisesStorage) {
         if (premisesStorage == null){
             this.premisesStorage = new HashSet<>(JsonManager.getInstance().deserializeFromJson(new File(PREMISES_JSON), Premises.class));
         }else{
-            this.premisesStorage = premisesStorage;
+            this.premisesStorage = new HashSet<>(premisesStorage);
         }
     }
 
-    Set<Premises> premisesStorage;
+    private final Set<Premises> premisesStorage;
 
     @Override
     public Premises create(Premises premises) {

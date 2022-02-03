@@ -21,15 +21,21 @@ public class BookingDAOIMPL implements BookingDAO {
     }
 
 
-    public BookingDAOIMPL(Set<Booking> bookings) {
+    static BookingDAOIMPL getTestInstance(Collection<Booking> collection){
+        if (collection == null) collection = new ArrayList<>();
+        return new BookingDAOIMPL(collection);
+    }
+
+
+    private BookingDAOIMPL(Collection<Booking> bookings) {
         if (bookings == null) {
             this.bookings = new HashSet<>(JsonManager.getInstance().deserializeFromJson(new File(URLConstants.BOOKING_JSON), Booking.class));
         } else {
-            this.bookings = bookings;
+            this.bookings = new HashSet<>(bookings);
         }
     }
 
-    private Set<Booking> bookings;
+    private final Set<Booking> bookings;
 
     @Override
     public List<Booking> findBookingByDateBetween(LocalDate start, LocalDate end) {
