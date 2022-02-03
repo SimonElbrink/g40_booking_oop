@@ -1,7 +1,6 @@
 package se.lexicon.data;
 
-import se.lexicon.data.AddressDAO;
-import se.lexicon.exceptions.ObjectNotFoundException;
+import se.lexicon.data.interfaces.AddressDAO;
 import se.lexicon.io.JsonManager;
 import se.lexicon.model.Address;
 
@@ -9,6 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static se.lexicon.io.URLConstants.ADDRESS_JSON;
 
@@ -35,7 +35,7 @@ public class AddressDAOIMPL implements AddressDAO {
     }
 
     //Where our Addresses are stored.
-    private List<Address> addressList;
+    private final List<Address> addressList;
 
 
     @Override
@@ -52,15 +52,15 @@ public class AddressDAOIMPL implements AddressDAO {
     }
 
     @Override
-    public Address findById(String id) {
-
+    public Optional<Address> findById(String id) {
+        Optional<Address> found = Optional.empty();
         for (Address address : addressList) {
             if (address.getId().equals(id)){
-                return address;
+                found = Optional.ofNullable(address);
+                break;
             }
         }
-
-        throw new ObjectNotFoundException("Could Not Find Address with ID:" + id);
+       return found;
     }
 
 
@@ -86,15 +86,12 @@ public class AddressDAOIMPL implements AddressDAO {
 
     @Override
     public List<Address> findAddressByCity(String city) {
-
         List<Address> found = new ArrayList<>();
-
         for (Address address : addressList) {
             if (address.getCity().equalsIgnoreCase(city)) {
                 found.add(address);
             }
         }
-
         return found;
     }
 

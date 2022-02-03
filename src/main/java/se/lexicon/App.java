@@ -2,8 +2,8 @@ package se.lexicon;
 
 
 import se.lexicon.data.*;
-import se.lexicon.data.AddressDAO;
-import se.lexicon.data.UserCredentialsDAO;
+import se.lexicon.data.interfaces.AddressDAO;
+import se.lexicon.data.interfaces.UserCredentialsDAO;
 import se.lexicon.io.JsonManager;
 import se.lexicon.model.*;
 

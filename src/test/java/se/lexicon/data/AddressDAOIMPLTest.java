@@ -2,6 +2,7 @@ package se.lexicon.data;
 
 import org.junit.Before;
 import org.junit.Test;
+import se.lexicon.data.interfaces.AddressDAO;
 import se.lexicon.model.Address;
 
 import java.util.ArrayList;

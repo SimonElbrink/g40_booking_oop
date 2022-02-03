@@ -1,9 +1,10 @@
-package se.lexicon.data;
+package se.lexicon.data.interfaces;
 
 import se.lexicon.model.Address;
 
 
 import java.util.List;
+import java.util.Optional;
 
 //CRUD - Create, Read, Update, Delete
 //Contract
@@ -16,7 +17,8 @@ public interface AddressDAO extends GenericCRUD<Address, String>{
 
     //READ
     @Override
-    Address findById(String id);
+    Optional<Address> findById(String id);
+
     @Override
     List<Address> findAll();
 

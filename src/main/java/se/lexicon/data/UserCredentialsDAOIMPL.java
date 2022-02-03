@@ -1,11 +1,13 @@
 package se.lexicon.data;
 
+import se.lexicon.data.interfaces.UserCredentialsDAO;
 import se.lexicon.model.UserCredentials;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class UserCredentialsDAOIMPL implements UserCredentialsDAO{
+public class UserCredentialsDAOIMPL implements UserCredentialsDAO {
 
 
     private static UserCredentialsDAO INSTANCE;
@@ -27,13 +29,12 @@ public class UserCredentialsDAOIMPL implements UserCredentialsDAO{
         return INSTANCE;
     }
 
-
-    private List<UserCredentials> userCredentialsList;
-
     UserCredentialsDAOIMPL(List<UserCredentials> userCredentialsList) {
         if (userCredentialsList == null) userCredentialsList = new ArrayList<>();
         this.userCredentialsList = userCredentialsList;
     }
+
+    private final List<UserCredentials> userCredentialsList;
 
     @Override
     public UserCredentials create(UserCredentials userCredentials) {
@@ -50,13 +51,14 @@ public class UserCredentialsDAOIMPL implements UserCredentialsDAO{
     }
 
     @Override
-    public UserCredentials findById(String id) {
+    public Optional<UserCredentials> findById(String id) {
+
         for (UserCredentials uc : userCredentialsList) {
             if (uc.getId().equals(id)){
-                return uc;
+                return Optional.ofNullable(uc);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override

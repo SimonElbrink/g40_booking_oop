@@ -1,12 +1,13 @@
-package se.lexicon.data;
+package se.lexicon.data.interfaces;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GenericCRUD<T, ID> {
 
     T create(T t);
     List<T> findAll();
-    T findById(ID id);
+    Optional<T> findById(ID id);
 
     boolean delete(ID id);
 

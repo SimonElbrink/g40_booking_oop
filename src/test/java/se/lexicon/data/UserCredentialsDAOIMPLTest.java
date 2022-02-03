@@ -3,6 +3,7 @@ package se.lexicon.data;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import se.lexicon.data.interfaces.UserCredentialsDAO;
 import se.lexicon.model.UserCredentials;
 
 import java.util.ArrayList;

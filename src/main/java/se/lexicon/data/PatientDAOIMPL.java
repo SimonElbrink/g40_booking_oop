@@ -1,6 +1,6 @@
 package se.lexicon.data;
 
-import se.lexicon.data.PatientDAO;
+import se.lexicon.data.interfaces.PatientDAO;
 import se.lexicon.io.JsonManager;
 import se.lexicon.model.Patient;
 
@@ -30,7 +30,7 @@ public class PatientDAOIMPL implements PatientDAO, Serializable {
         }
     }
 
-    private HashSet<Patient> patientCollection;
+    private final HashSet<Patient> patientCollection;
 
     @Override
     public Patient create(Patient patient) {
@@ -44,11 +44,10 @@ public class PatientDAOIMPL implements PatientDAO, Serializable {
     }
 
     @Override
-    public Patient findById(String id) {
+    public Optional<Patient> findById(String id) {
         return patientCollection.stream()
                 .filter( patient -> patient.getId().equals(id)) //intermediate operation - Returns a Stream
-                .findFirst() //Terminal Operator - End the stream and Execute the task.
-                .orElseThrow(RuntimeException::new);
+                .findFirst(); //Terminal Operator - End the stream and Execute the task.
     }
 
     @Override
