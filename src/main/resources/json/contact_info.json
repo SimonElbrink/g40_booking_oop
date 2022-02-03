@@ -1,1 +1,13 @@
-[ ]
+[ {
+  "id" : "5605e0a5-50e8-4c6e-a42f-4fd1a63f14ae",
+  "email" : "user2.test@test.se",
+  "phone" : "0123456788"
+}, {
+  "id" : "54571b14-3e6f-4f4d-9c79-b94d11d0bad7",
+  "email" : "teleborg.test@test.se",
+  "phone" : "0123456789"
+}, {
+  "id" : "0aab25ae-533f-45ba-b1eb-58ae1aca0be8",
+  "email" : "user1.test@test.se",
+  "phone" : "0123456788"
+} ]

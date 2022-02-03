@@ -2,15 +2,13 @@ package se.lexicon;
 
 
 import se.lexicon.data.*;
-import se.lexicon.data.interfaces.AddressDAO;
-import se.lexicon.data.interfaces.UserCredentialsDAO;
+import se.lexicon.data.interfaces.*;
 import se.lexicon.io.JsonManager;
 import se.lexicon.model.*;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static se.lexicon.io.URLConstants.*;
 
@@ -22,7 +20,6 @@ public class App
         ContactInfo testContactInfo = new ContactInfo("teleborg.test@test.se","0123456789");
 
         Premises testVaccineCenter = new Premises("test vaccine center", testAddress, testContactInfo);
-
 
 
         UserCredentials testUserCredentials1 = new UserCredentials("user1","123456", "role1");
@@ -40,11 +37,6 @@ public class App
         Booking testBooking3 = new Booking(LocalDateTime.parse("2021-12-30T11:00"),0, "ad1", "v125", testVaccineCenter );
 
 
-        System.out.println("Booking List");
-        System.out.println(testBooking1.bookingData());
-        System.out.println(testBooking2.bookingData());
-        System.out.println(testBooking3.bookingData());
-
         if (testBooking1.isVacant()){
             testBooking1.setPatient(patient1);
             System.out.println("Booking Id: " + testBooking1.getId());
@@ -59,51 +51,32 @@ public class App
             System.out.println(" booking time is not available");
         }
 
-        System.out.println("Booking List");
-        System.out.println(testBooking1.bookingData());
-        System.out.println(testBooking2.bookingData());
-        System.out.println(testBooking3.bookingData());
 
 
+        AddressDAO addressDAO = AddressDAOIMPL.getInstance();
+        addressDAO.create(testAddress);
 
+        BookingDAO bookingDAO = BookingDAOIMPL.getInstance();
+        bookingDAO.create(testBooking1);
+        bookingDAO.create(testBooking2);
+        bookingDAO.create(testBooking3);
 
-        AddressDAO addressStorage1 = AddressDAOIMPL.getInstance();
+        ContactInfoDAO contactInfoDAO = ContactInfoDAOImpl.getInstance();
+        contactInfoDAO.create(testContactInfo);
+        contactInfoDAO.create(contactInfoPatient1);
+        contactInfoDAO.create(contactInfoPatient2);
 
-//        addressStorage1.create(testAddress);
-//        addressStorage1.create("Storgatan 20", "123 45", "Växjö");
-//        addressStorage1.create("VårdGatan 10", "123 45", "Växjö");
-//        addressStorage1.create("Sjukhusvägen 5", "123 45", "Växjö");
-//        addressStorage1.create("Sjukhusvägen 1", "543 21", "SjukaStaden");
+        PatientDAO patientDAO = PatientDAOIMPL.getInstance();
+        patientDAO.create(patient1);
+        patientDAO.create(patient2);
 
-        System.out.println("_____________ Storage1 - FindAll __________________");
+        PremisesDAO premisesDAO = PremisesDAOIMPL.getInstance();
+        premisesDAO.create(testVaccineCenter);
 
-        List<Address> allAddresses = addressStorage1.findAll();
+        UserCredentialsDAO userCredentialsDAO  = UserCredentialsDAOIMPL.getINSTANCE();
+        userCredentialsDAO.create(testUserCredentials1);
+        userCredentialsDAO.create(testUserCredentials2);
 
-//        for (Address address : allAddresses) {
-//            System.out.println(address);
-//        }
-        allAddresses.forEach((Address address) -> System.out.println(address));
-
-//        System.out.println("_____________ FindAddressByCity __________________");
-//
-//        List<Address> addressesInSjukaStaden = addressStorage1.findAddressByCity("SjukaStaden");
-//
-//        addressesInSjukaStaden.forEach(System.out::println);
-
-
-        //"Separate File"
-//        System.out.println("_____________Storage2 - FindAll __________________");
-//        AddressDAO addressStorage2 = AddressDAOIMPL.getInstance(); // Same Reference as storage 1
-//        addressStorage2.create(testAddress);
-//        addressStorage2.create("Nygatan 8", "360 73", "Lenhovda");
-
-//        addressStorage2.findAll().forEach(System.out::println);
-
-
-        UserCredentialsDAO  ucDAO = UserCredentialsDAOIMPL.getINSTANCE();
-
-        ucDAO = UserCredentialsDAOIMPL.getINSTANCE();
-//        ucDAO.create(null);
 
         shutdown(); // At the end.
     }

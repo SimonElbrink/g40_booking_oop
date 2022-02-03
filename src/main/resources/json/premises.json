@@ -1,1 +1,15 @@
-[ ]
+[ {
+  "id" : "4a8740a0-6b35-49e9-b2ea-6d26afcd9541",
+  "name" : "test vaccine center",
+  "address" : {
+    "id" : "e5471244-999f-4a06-9e69-9646f0f3a679",
+    "streetAddress" : "Teleborg",
+    "zipCode" : "35252",
+    "city" : "Växjö"
+  },
+  "contactInfo" : {
+    "id" : "54571b14-3e6f-4f4d-9c79-b94d11d0bad7",
+    "email" : "teleborg.test@test.se",
+    "phone" : "0123456789"
+  }
+} ]

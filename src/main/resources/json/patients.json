@@ -1,1 +1,35 @@
-[ ]
+[ {
+  "id" : "7e80c917-b0f1-4196-885e-224464555461",
+  "ssn" : "19890202-1234",
+  "firstName" : "Test",
+  "lastName" : "Test",
+  "birthDate" : [ 1989, 2, 2 ],
+  "contactInfo" : {
+    "id" : "0aab25ae-533f-45ba-b1eb-58ae1aca0be8",
+    "email" : "user1.test@test.se",
+    "phone" : "0123456788"
+  },
+  "credentials" : {
+    "id" : "af1bd7ff-1439-4147-ba91-e3fa5953e654",
+    "username" : "user1",
+    "password" : "123456",
+    "role" : "role1"
+  }
+}, {
+  "id" : "41d3ffac-6518-45f4-a4ca-f54e9ac4812f",
+  "ssn" : "19900101-1234",
+  "firstName" : "Test",
+  "lastName" : "Test",
+  "birthDate" : [ 1990, 1, 1 ],
+  "contactInfo" : {
+    "id" : "5605e0a5-50e8-4c6e-a42f-4fd1a63f14ae",
+    "email" : "user2.test@test.se",
+    "phone" : "0123456788"
+  },
+  "credentials" : {
+    "id" : "35d81f8e-36ee-4973-b2e9-9b079ed03665",
+    "username" : "user2",
+    "password" : "123456",
+    "role" : "role1"
+  }
+} ]

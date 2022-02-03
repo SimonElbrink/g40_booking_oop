@@ -1,36 +1,6 @@
 [ {
-  "id" : "83ee711d-2373-4626-9e8f-ae254c5fe8be",
+  "id" : "e5471244-999f-4a06-9e69-9646f0f3a679",
   "streetAddress" : "Teleborg",
   "zipCode" : "35252",
   "city" : "Växjö"
-}, {
-  "id" : "cac56b70-ed0b-4530-86b0-f0de69d0379e",
-  "streetAddress" : "Storgatan 20",
-  "zipCode" : "123 45",
-  "city" : "Växjö"
-}, {
-  "id" : "6db95b3b-5c34-418c-ac0f-5c0824131a89",
-  "streetAddress" : "VårdGatan 10",
-  "zipCode" : "123 45",
-  "city" : "Växjö"
-}, {
-  "id" : "f6a9bb39-bb74-4b97-9fbf-2db87b22a8d7",
-  "streetAddress" : "Sjukhusvägen 5",
-  "zipCode" : "123 45",
-  "city" : "Växjö"
-}, {
-  "id" : "cf09fafd-4a1c-4c67-8f3b-b5f71d630465",
-  "streetAddress" : "Sjukhusvägen 1",
-  "zipCode" : "543 21",
-  "city" : "SjukaStaden"
-}, {
-  "id" : "83ee711d-2373-4626-9e8f-ae254c5fe8be",
-  "streetAddress" : "Teleborg",
-  "zipCode" : "35252",
-  "city" : "Växjö"
-}, {
-  "id" : "0b9042af-2380-4eba-8088-ec9489d73e01",
-  "streetAddress" : "Nygatan 8",
-  "zipCode" : "360 73",
-  "city" : "Lenhovda"
 } ]

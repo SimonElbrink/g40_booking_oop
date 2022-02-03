@@ -1,1 +1,104 @@
-[ ]
+[ {
+  "id" : "8a5fac67-9031-43fa-8a16-25297fad29e0",
+  "dateTime" : [ 2021, 12, 30, 10, 30 ],
+  "price" : 0.0,
+  "administrator" : "ad1",
+  "vaccineId" : "v124",
+  "vacant" : false,
+  "patient" : {
+    "id" : "41d3ffac-6518-45f4-a4ca-f54e9ac4812f",
+    "ssn" : "19900101-1234",
+    "firstName" : "Test",
+    "lastName" : "Test",
+    "birthDate" : [ 1990, 1, 1 ],
+    "contactInfo" : {
+      "id" : "5605e0a5-50e8-4c6e-a42f-4fd1a63f14ae",
+      "email" : "user2.test@test.se",
+      "phone" : "0123456788"
+    },
+    "credentials" : {
+      "id" : "35d81f8e-36ee-4973-b2e9-9b079ed03665",
+      "username" : "user2",
+      "password" : "123456",
+      "role" : "role1"
+    }
+  },
+  "premises" : {
+    "id" : "4a8740a0-6b35-49e9-b2ea-6d26afcd9541",
+    "name" : "test vaccine center",
+    "address" : {
+      "id" : "e5471244-999f-4a06-9e69-9646f0f3a679",
+      "streetAddress" : "Teleborg",
+      "zipCode" : "35252",
+      "city" : "Växjö"
+    },
+    "contactInfo" : {
+      "id" : "54571b14-3e6f-4f4d-9c79-b94d11d0bad7",
+      "email" : "teleborg.test@test.se",
+      "phone" : "0123456789"
+    }
+  }
+}, {
+  "id" : "a1ee2f43-0efc-40ce-b6fb-8cb5408c6f36",
+  "dateTime" : [ 2021, 12, 30, 10, 0 ],
+  "price" : 0.0,
+  "administrator" : "ad1",
+  "vaccineId" : "v123",
+  "vacant" : false,
+  "patient" : {
+    "id" : "7e80c917-b0f1-4196-885e-224464555461",
+    "ssn" : "19890202-1234",
+    "firstName" : "Test",
+    "lastName" : "Test",
+    "birthDate" : [ 1989, 2, 2 ],
+    "contactInfo" : {
+      "id" : "0aab25ae-533f-45ba-b1eb-58ae1aca0be8",
+      "email" : "user1.test@test.se",
+      "phone" : "0123456788"
+    },
+    "credentials" : {
+      "id" : "af1bd7ff-1439-4147-ba91-e3fa5953e654",
+      "username" : "user1",
+      "password" : "123456",
+      "role" : "role1"
+    }
+  },
+  "premises" : {
+    "id" : "4a8740a0-6b35-49e9-b2ea-6d26afcd9541",
+    "name" : "test vaccine center",
+    "address" : {
+      "id" : "e5471244-999f-4a06-9e69-9646f0f3a679",
+      "streetAddress" : "Teleborg",
+      "zipCode" : "35252",
+      "city" : "Växjö"
+    },
+    "contactInfo" : {
+      "id" : "54571b14-3e6f-4f4d-9c79-b94d11d0bad7",
+      "email" : "teleborg.test@test.se",
+      "phone" : "0123456789"
+    }
+  }
+}, {
+  "id" : "6814554b-259d-4ad1-b3f1-22f654f83c61",
+  "dateTime" : [ 2021, 12, 30, 11, 0 ],
+  "price" : 0.0,
+  "administrator" : "ad1",
+  "vaccineId" : "v125",
+  "vacant" : true,
+  "patient" : null,
+  "premises" : {
+    "id" : "4a8740a0-6b35-49e9-b2ea-6d26afcd9541",
+    "name" : "test vaccine center",
+    "address" : {
+      "id" : "e5471244-999f-4a06-9e69-9646f0f3a679",
+      "streetAddress" : "Teleborg",
+      "zipCode" : "35252",
+      "city" : "Växjö"
+    },
+    "contactInfo" : {
+      "id" : "54571b14-3e6f-4f4d-9c79-b94d11d0bad7",
+      "email" : "teleborg.test@test.se",
+      "phone" : "0123456789"
+    }
+  }
+} ]
