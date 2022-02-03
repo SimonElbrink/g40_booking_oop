@@ -1,8 +1,11 @@
 package se.lexicon.data;
 
 import se.lexicon.data.interfaces.UserCredentialsDAO;
+import se.lexicon.io.JsonManager;
+import se.lexicon.io.URLConstants;
 import se.lexicon.model.UserCredentials;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +33,7 @@ public class UserCredentialsDAOIMPL implements UserCredentialsDAO {
     }
 
     UserCredentialsDAOIMPL(List<UserCredentials> userCredentialsList) {
-        if (userCredentialsList == null) userCredentialsList = new ArrayList<>();
+        if (userCredentialsList == null) userCredentialsList = new ArrayList<>(JsonManager.getInstance().deserializeFromJson(new File(URLConstants.CREDENTIALS_JSON), UserCredentials.class));
         this.userCredentialsList = userCredentialsList;
     }
 

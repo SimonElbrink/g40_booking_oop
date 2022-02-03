@@ -108,15 +108,15 @@ public class App
         shutdown(); // At the end.
     }
 
+    /**
+     * Save all Objects from Data Access Objects in to json files found in "src/main/resources/json" directory.
+     */
     public static void shutdown(){
-         // Save all data to file. (using json.)
-
-        //serialize Address
         JsonManager.getInstance().serializeToJson(AddressDAOIMPL.getInstance().findAll(),new File(ADDRESS_JSON));
-        //serialize Patients
+        JsonManager.getInstance().serializeToJson(BookingDAOIMPL.getInstance().findAll(), new File(BOOKING_JSON));
         JsonManager.getInstance().serializeToJson(PatientDAOIMPL.getInstance().findAll(), new File(PATIENTS_JSON));
-        //serialize Credentials
+        JsonManager.getInstance().serializeToJson(ContactInfoDAOImpl.getInstance().findAll(), new File(CONTACT_INFO_JSON));
+        JsonManager.getInstance().serializeToJson(PremisesDAOIMPL.getInstance().findAll(), new File(PREMISES_JSON));
         JsonManager.getInstance().serializeToJson(UserCredentialsDAOIMPL.getINSTANCE().findAll(), new File(CREDENTIALS_JSON));
-
     }
 }

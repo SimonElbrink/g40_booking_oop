@@ -2,7 +2,7 @@ package se.lexicon.data;
 
 import se.lexicon.data.interfaces.PremisesDAO;
 import se.lexicon.io.JsonManager;
-import se.lexicon.model.Address;
+
 import se.lexicon.model.Premises;
 
 import java.io.File;
@@ -15,7 +15,7 @@ public class PremisesDAOIMPL implements PremisesDAO {
 
     private static PremisesDAOIMPL INSTANCE;
 
-    private static PremisesDAOIMPL getInstance(){
+    public static PremisesDAOIMPL getInstance(){
         if(INSTANCE == null){
             INSTANCE = new PremisesDAOIMPL(null);
         }
@@ -25,9 +25,9 @@ public class PremisesDAOIMPL implements PremisesDAO {
     public PremisesDAOIMPL(Set<Premises> premisesStorage) {
         if (premisesStorage == null){
             this.premisesStorage = new HashSet<>(JsonManager.getInstance().deserializeFromJson(new File(PREMISES_JSON), Premises.class));
+        }else{
+            this.premisesStorage = premisesStorage;
         }
-
-        this.premisesStorage = premisesStorage;
     }
 
     Set<Premises> premisesStorage;
