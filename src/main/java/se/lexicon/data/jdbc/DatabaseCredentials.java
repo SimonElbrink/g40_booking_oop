@@ -1,34 +1,50 @@
 package se.lexicon.data.jdbc;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class DatabaseCredentials {
 
-    private final String URL = "jdbc:mysql://localhost:3306/vaccine_booking?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Europe/Berlin";
-    private final String USER = "root";
-    private final String PASSWORD = "1234";
+    private String URL;
+    private String USER;
+    private String PASSWORD;
 
-    private static final DatabaseCredentials INSTANCE = new DatabaseCredentials();
+    private static final DatabaseCredentials INSTANCE = new DatabaseCredentials(Paths.get("database/mysql.properties"));
 
-    public DatabaseCredentials() {
-    }
 
     public static DatabaseCredentials getInstance(){
         return INSTANCE;
     }
 
-    public Connection getConnection(){
-        Connection connection = null;
+    private DatabaseCredentials(Path path){
+        Properties properties = new Properties();
+        try {
+            properties.load(Files.newBufferedReader(path));
+            USER = properties.getProperty("username");
+            PASSWORD = properties.getProperty("password");
+            URL = properties.getProperty("url");
 
-        try{
-            connection = DriverManager.getConnection(URL,USER,PASSWORD);
-        } catch (SQLException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return connection;
     }
 
+    public String getURL() {
+        return URL;
+    }
+
+    public String getUSER() {
+        return USER;
+    }
+
+    public String getPASSWORD() {
+        return PASSWORD;
+    }
 }

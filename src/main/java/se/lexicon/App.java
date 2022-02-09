@@ -5,6 +5,7 @@ import se.lexicon.data.*;
 import se.lexicon.data.interfaces.*;
 import se.lexicon.data.jdbc.ContactInfoDAOJdbcImpl;
 import se.lexicon.io.JsonManager;
+import se.lexicon.model.ContactInfo;
 import se.lexicon.model.UserCredentials;
 
 import java.io.File;
@@ -30,16 +31,19 @@ public class App
         userCredentialsDAO.create(userCredentials);
 
 
-        ContactInfoDAO contactInfoDAOJdbc= new ContactInfoDAOJdbcImpl();
+        ContactInfoDAO contactInfoDAOJdbc = new ContactInfoDAOJdbcImpl();
 
 
-//        contactInfoDAOJdbc.create(new ContactInfo("01234", "info@lexicon.se", "123456789"));
-//        contactInfoDAOJdbc.create(new ContactInfo("1", "support@lexicon.se", "0987654321"));
+        contactInfoDAOJdbc.create(new ContactInfo("01234", "info@lexicon.se", "123456789"));
+        contactInfoDAOJdbc.create(new ContactInfo("1", "support@lexicon.se", "0987654321"));
 
         System.out.println("finding all contact infos");
         contactInfoDAOJdbc.findAll().forEach(System.out::println);
 
         System.out.println("Contact_info found by id: "+ contactInfoDAOJdbc.findById("01234"));
+
+        contactInfoDAOJdbc.delete("1");
+        contactInfoDAOJdbc.delete("01234");
 
         shutdown(); // Serialize just Before exiting program.
     }
