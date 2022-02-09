@@ -29,7 +29,7 @@ public class Patient implements Serializable {
     this.lastName = lastName;
     this.birthDate = birthDate;
     this.contactInfo = contactInfo;
-    this.credentials = credentials;
+    setCredentials(credentials);
   }
 
   public Patient(String ssn,
