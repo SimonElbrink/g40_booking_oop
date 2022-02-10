@@ -29,7 +29,6 @@ public class ContactInfoDAOJdbcImpl extends AbstractDAO implements ContactInfoDA
         }finally {
             closeAll(preparedStatement, connection);
         }
-
         return contactInfo;
     }
 
@@ -86,7 +85,29 @@ public class ContactInfoDAOJdbcImpl extends AbstractDAO implements ContactInfoDA
 
     @Override
     public Optional<ContactInfo> findByEmail(String email) {
-        return Optional.empty();
+
+        ContactInfo contactInfo = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement("SELECT * FROM contact_info WHERE email = ?");
+            preparedStatement.setString(1, email);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                contactInfo = mapToContactInfo(resultSet);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+            return Optional.ofNullable(contactInfo);
     }
 
     @Override
