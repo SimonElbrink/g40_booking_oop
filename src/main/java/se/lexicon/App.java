@@ -7,6 +7,8 @@ import se.lexicon.data.jdbc.ContactInfoDAOJdbcImpl;
 import se.lexicon.data.jdbc.DatabaseCredentials;
 import se.lexicon.io.JsonManager;
 import se.lexicon.model.ContactInfo;
+import se.lexicon.model.TestTableEntity;
+import se.lexicon.data.jdbc.TestTableDAOJdbcImpl;
 import se.lexicon.model.UserCredentials;
 
 import java.io.File;
@@ -47,6 +49,16 @@ public class App
 
         contactInfoDAOJdbc.delete("1");
         contactInfoDAOJdbc.delete("01234");
+
+
+
+        TestTableDAO testTableDAO = new TestTableDAOJdbcImpl();
+
+        TestTableEntity returnedEntity = testTableDAO.create(new TestTableEntity(1230, "Hello", 1337));
+
+
+        System.out.println("returnedEntity = " + returnedEntity);
+
 
         shutdown(); // Serialize just Before exiting program.
     }
