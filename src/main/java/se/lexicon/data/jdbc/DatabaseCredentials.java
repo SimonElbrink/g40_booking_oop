@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
 
 public class DatabaseCredentials {
@@ -15,10 +12,15 @@ public class DatabaseCredentials {
     private String USER;
     private String PASSWORD;
 
-    private static final DatabaseCredentials INSTANCE = new DatabaseCredentials(Paths.get("database/mysql.properties"));
+    private static DatabaseCredentials INSTANCE;
+
+    public static void initialize(String url){
+        INSTANCE = new DatabaseCredentials(Paths.get(url));
+    }
 
 
     public static DatabaseCredentials getInstance(){
+        if (INSTANCE == null) throw new IllegalArgumentException("Please initialize object first");
         return INSTANCE;
     }
 

@@ -4,6 +4,7 @@ package se.lexicon;
 import se.lexicon.data.*;
 import se.lexicon.data.interfaces.*;
 import se.lexicon.data.jdbc.ContactInfoDAOJdbcImpl;
+import se.lexicon.data.jdbc.DatabaseCredentials;
 import se.lexicon.io.JsonManager;
 import se.lexicon.model.ContactInfo;
 import se.lexicon.model.UserCredentials;
@@ -15,6 +16,8 @@ import static se.lexicon.io.URLConstants.*;
 public class App
 {
     public static void main( String[] args ){
+
+        DatabaseCredentials.initialize("database/mysql.properties");
 
         AddressDAO addressDAO = AddressDAOIMPL.getInstance();
 

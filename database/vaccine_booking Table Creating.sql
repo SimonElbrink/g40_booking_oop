@@ -1,93 +1,124 @@
-create database vaccine_booking;
-use vaccine_booking;
-create table address
-(
-    id       varchar(255) not null primary key,
-    city     varchar(255) null,
-    street   varchar(255) null,
-    zip_code varchar(20)  null
-);
 
-create table app_role
-(
-    id        varchar(255) not null
-        primary key,
-    user_role int          null
-);
 
-create table app_user
+drop table if exists booking;
+
+drop table if exists patient;
+
+drop table if exists premises;
+
+drop table if exists address;
+
+drop table if exists contact_info;
+
+drop table if exists test_table;
+
+drop table if exists user_credentials;
+
+
+
+create table if not exists address
 (
     id       varchar(255) not null
         primary key,
-    password varchar(255) null,
-    username varchar(100) null,
-    constraint UK_3k4cplvh82srueuttfkwnylq0
-        unique (username)
+    street   varchar(255) not null,
+    zip_code varchar(20)  not null,
+    city     varchar(255) not null
 );
 
-create table contact_info
+create table if not exists contact_info
 (
     id    varchar(255) not null
         primary key,
-    email varchar(255) null,
-    phone varchar(255) null,
-    constraint UK_gsp1iln2jy1n3h7iui85cc9o7
+    email varchar(100) not null,
+    phone varchar(100) null,
+    constraint email_UNIQUE
         unique (email)
 );
 
-create table patient
+create table if not exists premises
 (
-    id                 varchar(255) not null
+    id              varchar(255) not null
         primary key,
-    birth_date         date         null,
-    first_name         varchar(255) null,
-    last_name          varchar(255) null,
-    pnr                varchar(20)  null,
-    fk_contact_info_id varchar(255) null,
-    fk_app_user_id     varchar(255) null,
-    constraint UK_cge813ujauh2xohwqhwyn85se
-        unique (pnr),
-    constraint FK2pejcjsxpiibfo9hmyo9ccv9c
-        foreign key (fk_contact_info_id) references contact_info (id),
-    constraint FK8aa7rr730wus782e9ejhq34x7
-        foreign key (fk_app_user_id) references app_user (id)
+    name            varchar(255) not null,
+    fk_contact_info varchar(255) null,
+    fk_address      varchar(255) null,
+    constraint fk_premises_address1
+        foreign key (fk_address) references address (id),
+    constraint fk_premises_contact_info1
+        foreign key (fk_contact_info) references contact_info (id)
 );
 
-create table premises
+create index fk_premises_address1_idx
+    on premises (fk_address);
+
+create index fk_premises_contact_info1_idx
+    on premises (fk_contact_info);
+
+create table if not exists test_table
+(
+    id          int auto_increment
+        primary key,
+    description varchar(255) not null,
+    number      int          not null
+);
+
+create table if not exists user_credentials
+(
+    id       varchar(255) not null
+        primary key,
+    username varchar(100) not null,
+    password varchar(255) not null,
+    role     varchar(100) not null,
+    constraint username_UNIQUE
+        unique (username)
+);
+
+create table if not exists patient
+(
+    id                  varchar(255) not null
+        primary key,
+    ssn                 varchar(12)  not null,
+    first_name          varchar(100) not null,
+    last_name           varchar(100) not null,
+    birth_date          date         not null,
+    fk_user_credentials varchar(255) null,
+    fk_contact_info     varchar(255) null,
+    constraint ssn_UNIQUE
+        unique (ssn),
+    constraint fk_patient_contact_info1
+        foreign key (fk_contact_info) references contact_info (id),
+    constraint fk_patient_user_credentials
+        foreign key (fk_user_credentials) references user_credentials (id)
+);
+
+create table if not exists booking
 (
     id            varchar(255) not null
         primary key,
-    name          varchar(255) null,
-    fk_address_id varchar(255) null,
-    constraint FKbn7o94n80ya1b9p0k3riyrdbn
-        foreign key (fk_address_id) references address (id)
+    date_time     datetime     not null,
+    price         decimal      not null,
+    administrator varchar(255) null,
+    vaccine_id    varchar(255) not null,
+    vacant        tinyint(1)   not null,
+    fk_patient    varchar(255) null,
+    fk_premises   varchar(255) null,
+    constraint fk_booking_patient1
+        foreign key (fk_patient) references patient (id),
+    constraint fk_booking_premises1
+        foreign key (fk_premises) references premises (id)
 );
 
-create table booking
-(
-    id               varchar(255)   not null
-        primary key,
-    administrator_id varchar(255)   null,
-    date_time        datetime(6)    null,
-    price            decimal(19, 2) null,
-    vacant           bit            not null,
-    vaccine_type     varchar(255)   null,
-    fk_patient_id    varchar(255)   null,
-    fk_premises_id   varchar(255)   null,
-    constraint FK2fq3er1p8a8bqygnnhvr9709y
-        foreign key (fk_patient_id) references patient (id),
-    constraint FKay7xxlvqithkkc93wkx32e9tr
-        foreign key (fk_premises_id) references premises (id)
-);
+create index fk_booking_patient1_idx
+    on booking (fk_patient);
 
-create table role_app_user
-(
-    fk_app_role_id varchar(255) not null,
-    fk_app_user_id varchar(255) not null,
-    primary key (fk_app_role_id, fk_app_user_id),
-    constraint FKfh0yl57vt99ay4mp3w8hmwcd4
-        foreign key (fk_app_role_id) references app_role (id),
-    constraint FKsm1hge1axc39v0v1xc2imtqku
-        foreign key (fk_app_user_id) references app_user (id)
-);
+create index fk_booking_premises1_idx
+    on booking (fk_premises);
+
+create index fk_patient_contact_info1_idx
+    on patient (fk_contact_info);
+
+create index fk_patient_user_credentials_idx
+    on patient (fk_user_credentials);
+
+
 
