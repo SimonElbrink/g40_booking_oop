@@ -69,6 +69,13 @@ public class PremisesDAOIMPL implements PremisesDAO {
     }
 
     @Override
+    public List<Premises> findPremisesByZipcode(String zipCode) {
+        return premisesStorage.stream()
+                .filter(premises -> premises.getAddress().getZipCode().equals(zipCode))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public boolean delete(String id) {
         return premisesStorage.removeIf(premises -> premises.getId().equals(id));
     }

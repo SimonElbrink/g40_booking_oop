@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+//Util class for our JDBC DAO
 public class AbstractDAO {
 
     public void closeAll(AutoCloseable...closeables) {

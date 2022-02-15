@@ -23,6 +23,11 @@ public class Premises implements Serializable {
     this(UUID.randomUUID().toString(), name, address, contactInfo);
   }
 
+  public Premises(String id, String name) {
+    this.id = id;
+    this.name = name;
+  }
+
   public Premises() {
   }
 
@@ -53,5 +58,15 @@ public class Premises implements Serializable {
 
   public void setContactInfo(ContactInfo contactInfo) {
     this.contactInfo = contactInfo;
+  }
+
+  @Override
+  public String toString() {
+    return "Premises{" +
+            "id='" + id + '\'' +
+            ", name='" + name + '\'' +
+            ", address=" + address +
+            ", contactInfo=" + contactInfo +
+            '}';
   }
 }
