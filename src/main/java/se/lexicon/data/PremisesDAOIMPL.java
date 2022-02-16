@@ -81,4 +81,8 @@ public class PremisesDAOIMPL implements PremisesDAO {
     }
 
 
+    @Override
+    public Premises update(Premises premises) {
+        return null;
+    }
 }

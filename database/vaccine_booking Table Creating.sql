@@ -124,10 +124,13 @@ create index fk_patient_user_credentials_idx
 INSERT INTO contact_info (id, email, phone)
 VALUES ('infotest1', 'info@test.se', '1234567890');
 
+INSERT INTO contact_info (id, email, phone)
+VALUES ('SjukhusInfo', 'info@sjukhus.se', '1234567890');
+
 INSERT INTO address (id, street, zip_code, city)
 VALUES ('addresstest1', 'Storgatan 1', '123 45', 'Växjö');
 
 INSERT INTO address (id, street, zip_code, city)
-VALUES ('addres1', 'Street1', '123 45', 'sometown');
+VALUES ('Sjukhuset 1', 'Sjukhusvägen 5', '123 45', 'Växjö');
 
 

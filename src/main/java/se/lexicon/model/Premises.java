@@ -11,6 +11,7 @@ public class Premises implements Serializable {
   private ContactInfo contactInfo;
 
 
+  //All Args
   public Premises(String id, String name, Address address, ContactInfo contactInfo) {
     if(id == null) throw new RuntimeException("id was null");
     this.id = id;
